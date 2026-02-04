@@ -115,3 +115,53 @@ for model in [62, 64, 99]:
     analytics_comp_df, summary_df = create_model_dataframes(model)
     print(f"Analytics_Comp_{model}:\n", analytics_comp_df)
     print(f"\nSummary_{model}:\n", summary_df)
+
+
+
+
+NON-NEGOTIABLE STYLE RULES
+1) Global colors:
+   - Background: near-black (#0B0B0B or #0A0A0A)
+   - Panels/containers: slightly lighter (#121212 / #151515)
+   - Text: off-white (#E6E6E6)
+   - Muted text: gray (#9AA0A6)
+   - Accent: Bloomberg-like orange (#FF9900 or #FF8C00)
+   - Borders/dividers: dark gray (#2A2A2A)
+2) Typography:
+   - Use a monospace font for all UI (e.g., "IBM Plex Mono", "JetBrains Mono", or "Courier New").
+   - Slightly smaller font sizes than default; compact spacing.
+3) Layout:
+   - Dense dashboard look: use st.columns for grids, use bordered sections.
+   - Replace big whitespace with tighter margins/padding.
+4) Components:
+   - Add a top header bar with app title on the left and small status text on right.
+   - Put KPIs in small “terminal tiles” (numbers in orange).
+   - Use sections with titles like “MARKET”, “RISK”, “CHARTS” in uppercase.
+5) Charts:
+   - Keep chart background black, gridlines subtle gray, axis labels off-white, series default to orange (or orange + a couple muted colors).
+   - Avoid bright blue default chart themes.
+
+IMPLEMENTATION REQUIREMENTS (STREAMLIT)
+- Implement theme via:
+  A) Create/modify .streamlit/config.toml to set base="dark" and primaryColor=accent orange
+  AND
+  B) Inject custom CSS using st.markdown(..., unsafe_allow_html=True) for:
+     * background colors
+     * sidebar styling
+     * monospace font
+     * buttons, sliders, selectbox accents
+     * “panel” class for containers
+- Do NOT change business logic. Only adjust styling/layout.
+- Keep changes minimal, clean, and maintainable.
+- Provide the final code changes as:
+  1) Updated config.toml contents
+  2) A Python snippet for CSS injection and reusable panel helper
+  3) Any chart theme changes (matplotlib/plotly) in-place
+
+DELIVERABLES
+- Add a function `inject_terminal_theme()` that applies CSS globally.
+- Add a helper `panel(title: str)` / context manager style to wrap sections in a styled container.
+- Update charts to use black backgrounds and orange accents.
+
+
+IMPORTANT: Use exact hex codes listed above. Use uppercase section headers. Ensure sidebar also matches dark theme. Ensure widget focus/hover states use orange. Verify readability: no pure white backgrounds anywhere.
